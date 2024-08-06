@@ -111,7 +111,7 @@
         </div>
       </div>
       <button type="submit">提交</button>
-    </form>
+      <button type="reset">刷新</button> </form>
     <div id="result"></div>
   </div>
   <script>
@@ -126,7 +126,7 @@
       }
       result.textContent = `您的總分為 ${totalScore} 分。`;
 
-      if (totalScore >= 10) { // 将提示信息放在 if 语句内
+      if (totalScore >= 10) {
         result.textContent += " 你需要評估是否太過沉迷手遊。";
       }
     });
