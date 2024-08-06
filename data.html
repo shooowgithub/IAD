@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>所有資料</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>所有資料</h2>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>學齡</th>
+          <th>問卷答案</th>
+          <th>總分</th>
+          <th>提交時間</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const dataTable = document.getElementById('dataTable');
+
+    // 從 localStorage 載入資料
+    let data = JSON.parse(localStorage.getItem('questionnaireData')) || [];
+
+    // 顯示資料
+    function displayData() {
+      dataTable.querySelector('tbody').innerHTML = ''; // 清空表格內容
+      data.forEach(item => {
+        const row = dataTable.insertRow();
+        row.insertCell().textContent = item.grade;
+        row.insertCell().textContent = `Q1: ${item.q1}, Q2: ${item.q2}, Q3: ${item.q3}, Q4: ${item.q4}`;
+        row.insertCell().textContent = item.totalScore;
+        row.insertCell().textContent = item.submitTime;
+      });
+    }
+
+    // 初始化顯示資料
+    displayData();
+  </script>
+</body>
+</html>
