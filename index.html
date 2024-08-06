@@ -140,7 +140,7 @@
       <button type="reset">刷新</button>
     </form>
     <div id="result"></div>
-    <a href="data.html" target="_blank"><button id="showDataButton">查看填答資料</button></a>
+    <a href="data.html" target="_blank"><button id="showDataButton">查看所有資料</button></a>
   </div>
   <script>
     const questionnaire = document.getElementById('questionnaire');
@@ -151,18 +151,6 @@
 
     // 從 localStorage 載入資料
     let data = JSON.parse(localStorage.getItem('questionnaireData')) || [];
-
-    // 顯示資料
-    function displayData() {
-      dataTable.querySelector('tbody').innerHTML = ''; // 清空表格內容
-      data.forEach(item => {
-        const row = dataTable.insertRow();
-        row.insertCell().textContent = item.grade;
-        row.insertCell().textContent = `Q1: ${item.q1}, Q2: ${item.q2}, Q3: ${item.q3}, Q4: ${item.q4}`;
-        row.insertCell().textContent = item.totalScore;
-        row.insertCell().textContent = item.submitTime;
-      });
-    }
 
     // 提交問卷
     questionnaire.addEventListener('submit', (event) => {
