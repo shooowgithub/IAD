@@ -140,22 +140,7 @@
       <button type="reset">刷新</button>
     </form>
     <div id="result"></div>
-    <button id="showDataButton">查看所有資料</button>
-  </div>
-  <div id="dataContainer" style="display: none;">
-    <h2>所有資料</h2>
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>學齡</th>
-          <th>問卷答案</th>
-          <th>總分</th>
-          <th>提交時間</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <a href="data.html" target="_blank"><button id="showDataButton">查看填答資料</button></a>
   </div>
   <script>
     const questionnaire = document.getElementById('questionnaire');
@@ -213,15 +198,6 @@
     questionnaire.addEventListener('reset', (event) => {
       result.textContent = ''; // 清空結果文本
     });
-
-    // 顯示所有資料
-    showDataButton.addEventListener('click', () => {
-      dataContainer.style.display = 'block';
-      displayData();
-    });
-
-    // 初始化顯示資料
-    displayData();
   </script>
 </body>
 </html>
