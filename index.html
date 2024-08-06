@@ -40,7 +40,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>手機遊戲成癮量表</h1>
+    <h1>你有手機遊戲成癮嗎？</h1>
     <form id="questionnaire">
       <div class="question">
         <p>您的學齡為：</p>
@@ -146,6 +146,10 @@
       if (totalScore >= 10) {
         result.textContent += " 你需要評估是否太過沉迷手遊。";
       }
+    });
+
+    questionnaire.addEventListener('reset', (event) => {
+      result.textContent = ''; // 清空结果文本
     });
   </script>
 </body>
