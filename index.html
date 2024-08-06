@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>手機遊戲成癮量表</title>
+  <title>你有手機遊戲成癮嗎？</title>
   <style>
     body {
       font-family: sans-serif;
@@ -42,6 +42,20 @@
   <div class="container">
     <h1>手機遊戲成癮量表</h1>
     <form id="questionnaire">
+      <div class="question">
+        <p>您的學齡為：</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="grade" value="國小"> 國小
+          </label>
+          <label class="option">
+            <input type="radio" name="grade" value="國中"> 國中
+          </label>
+          <label class="option">
+            <input type="radio" name="grade" value="高中"> 高中
+          </label>
+        </div>
+      </div>
       <div class="question">
         <p>1. 我曾因長時間玩手機遊戲而眼睛酸澀、肌肉痠痛，或有其他身體不適。</p>
         <div class="options">
@@ -111,7 +125,8 @@
         </div>
       </div>
       <button type="submit">提交</button>
-      <button type="reset">刷新</button> </form>
+      <button type="reset">刷新</button>
+    </form>
     <div id="result"></div>
   </div>
   <script>
@@ -124,7 +139,9 @@
       for (let i = 1; i <= 4; i++) {
         totalScore += parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
       }
-      result.textContent = `您的總分為 ${totalScore} 分。`;
+
+      const grade = document.querySelector('input[name="grade"]:checked').value;
+      result.textContent = `您的學齡為：${grade}，總分為 ${totalScore} 分。`;
 
       if (totalScore >= 10) {
         result.textContent += " 你需要評估是否太過沉迷手遊。";
