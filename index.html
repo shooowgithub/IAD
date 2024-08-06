@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>你有手機遊戲成癮嗎？</title>
+  <title>你有手機成癮的狀況嗎?</title>
   <style>
     body {
       font-family: sans-serif;
@@ -36,11 +36,23 @@
       margin-top: 20px;
       font-weight: bold;
     }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>你有手機遊戲成癮嗎？</h1>
+    <h1>你有手機成癮的狀況嗎?</h1>
     <form id="questionnaire">
       <div class="question">
         <p>您的學齡為：</p>
@@ -128,11 +140,46 @@
       <button type="reset">刷新</button>
     </form>
     <div id="result"></div>
+    <button id="showDataButton">查看所有資料</button>
+  </div>
+  <div id="dataContainer" style="display: none;">
+    <h2>所有資料</h2>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>學齡</th>
+          <th>問卷答案</th>
+          <th>總分</th>
+          <th>提交時間</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
   <script>
     const questionnaire = document.getElementById('questionnaire');
     const result = document.getElementById('result');
+    const showDataButton = document.getElementById('showDataButton');
+    const dataContainer = document.getElementById('dataContainer');
+    const dataTable = document.getElementById('dataTable');
 
+    // 從 localStorage 載入資料
+    let data = JSON.parse(localStorage.getItem('questionnaireData')) || [];
+
+    // 顯示資料
+    function displayData() {
+      dataTable.querySelector('tbody').innerHTML = ''; // 清空表格內容
+      data.forEach(item => {
+        const row = dataTable.insertRow();
+        row.insertCell().textContent = item.grade;
+        row.insertCell().textContent = `Q1: ${item.q1}, Q2: ${item.q2}, Q3: ${item.q3}, Q4: ${item.q4}`;
+        row.insertCell().textContent = item.totalScore;
+        row.insertCell().textContent = item.submitTime;
+      });
+    }
+
+    // 提交問卷
     questionnaire.addEventListener('submit', (event) => {
       event.preventDefault();
       let totalScore = 0;
@@ -146,11 +193,35 @@
       if (totalScore >= 10) {
         result.textContent += " 你需要評估是否太過沉迷手遊。";
       }
+
+      // 保存資料
+      const submitTime = new Date().toLocaleString();
+      const newItem = {
+        grade: grade,
+        q1: document.querySelector('input[name="q1"]:checked').value,
+        q2: document.querySelector('input[name="q2"]:checked').value,
+        q3: document.querySelector('input[name="q3"]:checked').value,
+        q4: document.querySelector('input[name="q4"]:checked').value,
+        totalScore: totalScore,
+        submitTime: submitTime
+      };
+      data.push(newItem);
+      localStorage.setItem('questionnaireData', JSON.stringify(data));
     });
 
+    // 刷新問卷
     questionnaire.addEventListener('reset', (event) => {
-      result.textContent = ''; // 清空结果文本
+      result.textContent = ''; // 清空結果文本
     });
+
+    // 顯示所有資料
+    showDataButton.addEventListener('click', () => {
+      dataContainer.style.display = 'block';
+      displayData();
+    });
+
+    // 初始化顯示資料
+    displayData();
   </script>
 </body>
 </html>
