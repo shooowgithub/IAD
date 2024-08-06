@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手機遊戲成癮量表</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+    .question {
+      margin-bottom: 10px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+    }
+    .option {
+      margin-bottom: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>手機遊戲成癮量表</h1>
+    <form id="questionnaire">
+      <div class="question">
+        <p>1. 我曾因長時間玩手機遊戲而眼睛酸澀、肌肉痠痛，或有其他身體不適。</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q1" value="4"> 非常符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="3"> 符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="2"> 不符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="1"> 非常不符合
+          </label>
+        </div>
+      </div>
+      <div class="question">
+        <p>2. 我常常原本沒有打算玩手機遊戲，卻會忍不住拿起手機來玩一下 (滑一下)。</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q2" value="4"> 非常符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="3"> 符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="2"> 不符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="1"> 非常不符合
+          </label>
+        </div>
+      </div>
+      <div class="question">
+        <p>3. 在過去的3個月裡，我感覺需要更常玩手機遊戲，或玩更久的時間才覺得我玩夠了。</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q3" value="4"> 非常符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="3"> 符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="2"> 不符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="1"> 非常不符合
+          </label>
+        </div>
+      </div>
+      <div class="question">
+        <p>4. 如果不能玩手機遊戲，我會覺得靜不下心、感到很煩躁。</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q4" value="4"> 非常符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="3"> 符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="2"> 不符合
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="1"> 非常不符合
+          </label>
+        </div>
+      </div>
+      <button type="submit">提交</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script>
+    const questionnaire = document.getElementById('questionnaire');
+    const result = document.getElementById('result');
+
+    questionnaire.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let totalScore = 0;
+      for (let i = 1; i <= 4; i++) {
+        totalScore += parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+      }
+      result.textContent = `您的總分為 ${totalScore} 分。`;
+    });
+  </script>
+</body>
+</html>
